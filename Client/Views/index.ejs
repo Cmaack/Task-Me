@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html ng-app="TaskMeApp">
+  <head>
+    <meta charset="utf-8">
+    <title>task.me</title>
+    <link rel="stylesheet" href="/CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" media="screen" charset="utf-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+    <script src="/JS/controllers/tasks_controller.js" charset="utf-8"></script>
+    <script src="/JS/app.js" charset="utf-8"></script>
+  </head>
+  <body>
+
+<section ng-controller="TaskController">
+
+  <!--======================= Start Appointments =======================-->
+
+  <div class="container" id="appointments-header">
+    <div class="row">
+      <h2 class="u-full-width">Appointments | Scheduled Events </h2>
+    </div>
+  </div>
+  <div class="container" id="render-appointments">
+    <div class="row">
+    <div class="twelve columns">
+    <ul ng-repeat="task in tasks">
+      <li>
+        <h5> Appointment: {{ task.appointment_name }} </h5>
+        <h5> Time: {{ task.appointment_time}} </h5>
+        <h5> Location: {{ task.appointment_location }} </h5>
+        <h5> Description:{{ task.appointment_description }} </h5>
+      </li>
+    </ul>
+  </div>
+  </div>
+  </div>
+  <!--======================= End Appointments  =======================-->
+
+<!--======================= Start Todo List =======================-->
+<div class="to-do-list">
+  <div class="container" id="todo-header">
+    <div class="row">
+      <h2 class="u-full-width">To Do Today </h2>
+    </div>
+  </div>
+
+    <ul>
+      <li ng-repeat="task in tasks">
+
+        <h4> {{ task.todo_name }} <h4>
+        <div class="to-do-list-details">
+          <h5>Priority: {{ task.priority_level }}</h5>
+          <h5>Do By: {{ task.todo_deadline }}</h5>
+          </div>
+          <button type="button" ng-click="removeTask(task._id)">   x   </button>
+      </li>
+    </ul>
+
+</div>
+<!--======================= End Todo List =======================-->
+
+
+
+
+
+<!--======================= Start Phone/Email =======================-->
+<div class="phone-calls">
+
+<div class="container" id="email-phone-header">
+  <div class="row">
+    <h2 class="u-full-width">Emails | Phone Calls</h2>
+  </div>
+</div>
+<div ng-repeat="task in tasks">
+  <div class="row">
+<h4>Contact: {{task.person_name}} </h4>
+<h5>Phone: {{task.phone_number}}</h5>
+<h5>Email: {{task.email}}</h5>
+<h5>{{task.phone_deadline}}</h5>
+<h5>Notes: {{task.notes}}</h5>
+
+  </div>
+</div>
+
+
+</div>
+<!--======================= End Phone/Email =======================-->
+
+
+<!--======================= FORMS  =======================-->
+
+<!-- todo -->
+<div class="todo-form">
+  <div class="container">
+    <div class="row">
+    <h3>To be Done Today</h3>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+  <form ng-submit="createTa'Unimportantsk()">
+    <input type="text" placeholder="Task Name" ng-model="newTask.todo_name">
+    <select placeholder="Priority" ng-model="newTask.priority_level"> <!-- change to enum -->
+      <option value="Urgent">Urgent</option>
+      <option value="High">High</option>
+      <option value="Moderate" >Moderate</option>
+      <option value="Low">Low</option>
+      <option value="'Unimportant">Unimportant</option>
+    </select>
+    <input type="text" placeholder="Location" ng-model="newTask.location">
+    <input type="text" placeholder="Description" ng-model="newTask.description">
+    <input type="text" placeholder="Due By" ng-model="newTask.due_by">
+    <button type="submit" name="button">Task Me!</button>
+  </form>
+  </div>
+</div>
+
+<!-- Appointments -->
+<div class="appointment-form">
+  <div class="container">
+    <div class="row">
+      <h3>New Appointment</h3>
+    </div>
+  </div>
+<div class="container">
+  <form ng-submit="createTask()">
+      <div class="row">
+        <div class="four columns">
+          <input class="u-full-width" type="text" ng-model="task.appointment_name" placeholder="Appointment">
+          <input class="u-full-width" type="text" ng-model="task.appointment_time" placeholder="Time">
+        </div>
+        <div class="five columns">
+          <input class="u-full-width" type="text" ng-model="task.appointment_location" placeholder="Location">
+          <input class="u-full-width" type="text" ng-model="task.appointment_description" placeholder="Description">
+        </div>
+      </div>
+      <div class="row">
+        <div class="three columns">
+          <button type="sumbit" name="button">Task Me!</button>
+        </div>
+      </div>
+
+  </form>
+  </div>
+</div>
+
+
+<!-- Phone & Email -->
+<div class="container">
+  <div class="row">
+    <h3>New Phone Call or Email</h3>
+  </div>
+</div>
+
+<div class="container">
+  <form ng-submit="createTask()">
+    <div class="container">
+      <div class="row">
+        <div class="four columns">
+          <input class="u-full-width" type="text" ng-model="task.person_name" placeholder="Contact Name">
+        </div>
+        <div class="four columns">
+          <input class="u-full-width" type="text" ng-model="task.phone_number" placeholder="Phone Number">
+        </div>
+        <div class="four columns">
+          <input class="u-full-width" type="text" ng-model="task.email" placeholder="Email Address">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="eight columns">
+        <input class="u-full-width" type="text" ng-model="task.notes" placeholder="Notes">
+        </div>
+        <div class="four columns">
+          <button type="submit" name="button">Task Me!</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+</section>
+
+  </body>
+</html>
