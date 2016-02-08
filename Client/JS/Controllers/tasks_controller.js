@@ -1,10 +1,11 @@
-angular.module('TaskMeApp').controller('TaskController', [ '$scope', '$http', function($scope, $http){
+var app = angular.module('TaskMeApp');
 
-  $scope.newTask = {};
+app.controller('TasksController', ['$scope', '$http', function ($scope, $http){
 
+  $scope.newTask = [];
 
    $scope.masterTask = angular.copy($scope.newTask );
-   $scope.tasks = []
+   $scope.tasks = {};
 
    $scope.allTasks = function(){
       $scope.tasks = [];
@@ -25,14 +26,15 @@ angular.module('TaskMeApp').controller('TaskController', [ '$scope', '$http', fu
     });
   };
 
-  $scope.removeTask = function(idx){
+  $scope.removeTask = function(index){
     $http({
-      url: 'api/tasks/' + idx,
+      url: 'api/tasks/' + index,
       method: 'delete'
     }).then(function(){
       $scope.allTasks();
-    });
+    })
   };
-  $scope.allTasks();
+
+
 
 }]);

@@ -1,0 +1,33 @@
+body{
+  margin: 0;
+  padding:0;
+}
+
+form{
+  padding: 1em;
+  border: 1px solid grey;
+}
+#page-header{
+  border-bottom: 2px solid black;
+  margin-bottom: 2em;
+  padding: 5px;
+}
+#toggle {
+  display: none;
+}
+
+#toggle:target {
+  display: block;
+}
+
+#toggle:target + .close {
+  display: block;
+}
+
+.close {
+  display: none;
+  margin-top: -2em;
+  margin-left: 18%;
+  margin-bottom: 2em;
+  padding: 3px;
+}
